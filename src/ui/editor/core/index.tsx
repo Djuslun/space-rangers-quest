@@ -96,6 +96,8 @@ export function EditorCore({
 
   const [isPlaying, setIsPlaying] = React.useState<{ gameState: GameState | null } | null>(null);
 
+  const [isMusic, setIsMusic] = React.useState<boolean>(true)
+
   // DEBUGGING
   /*
   React.useEffect(() => {
@@ -525,8 +527,8 @@ export function EditorCore({
         }}
         setGameState={(newState) => setIsPlaying({ gameState: newState })}
         defaultMusicList={undefined}
-        isMusic={true}
-        setIsMusic={() => {}}
+        isMusic={isMusic}
+        setIsMusic={setIsMusic}
         onExit={() => setIsPlaying(null)}
         showTaskInfoOnQuestStart={true}
       />

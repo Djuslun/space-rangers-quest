@@ -198,7 +198,7 @@ export function QuestPlay({
 
   defaultMusicList: string[] | undefined;
   isMusic: boolean;
-  setIsMusic: (isMusic: boolean) => void;
+  setIsMusic: React.Dispatch<React.SetStateAction<boolean>>;
 
   onExit: () => void;
   busySaving?: boolean;

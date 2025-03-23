@@ -1,0 +1,7 @@
+[build]
+base = "" # если код в корне репозитория
+publish = "built-web" # директория с готовым билдом
+command = "npm install --legacy-peer-deps && npm run build"
+
+[build.environment]
+NODE_VERSION = "16"
