@@ -53,6 +53,7 @@ export class QuestInfo extends React.Component<
       )
       .catch((e) => console.warn(e));
     window.scrollTo(0, 0);
+    toggleFullscreen(false);
   }
   render() {
     const { l, player, index, db } = this.props.store;

@@ -21,6 +21,7 @@ import { QuestPlay } from "./questPlay/questPlay";
 import { toJS } from "mobx";
 import { ErrorInfo } from "./common";
 import { Progress } from "reactstrap";
+import { toggleFullscreen } from "./questPlay/fullscreen";
 
 interface QuestPlayState {
   quest?: Quest;
@@ -48,6 +49,7 @@ export class QuestPlayController extends React.Component<
   };
 
   componentDidMount() {
+    toggleFullscreen(true);
     this.loadData().catch((e) => this.setState({ error: e }));
   }
 
