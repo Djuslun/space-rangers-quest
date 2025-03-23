@@ -1,7 +1,16 @@
 [build]
 base = "" # если код в корне репозитория
 publish = "built-web" # директория с готовым билдом
-command = "npm install --legacy-peer-deps && npm run pack-game-data && npm run build"
+command = """
+    rm -rf built-web || true &&
+    npm install --legacy-peer-deps &&
+    mkdir -p built-web &&
+    npm run prettier-check &&
+    npm run test &&
+    npm run lint &&
+    npm run pack-game-data &&
+    npm run build
+  """
 
 [build.environment]
 NODE_VERSION = "16"
