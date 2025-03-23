@@ -54,11 +54,15 @@ Check English have eng quests origin
 const warns: string[] = [];
 
 const dataSrcPath = __dirname + "/../../borrowed";
+const builtPath = __dirname + "/../../built-web";
 const dataDstPath = __dirname + "/../../built-web/data";
 
 const resultJsonFile = dataDstPath + "/index.json";
 
 console.info(`Creating destination folders`);
+if (!fs.existsSync(builtPath)) {
+  fs.mkdirSync(builtPath);
+}
 if (!fs.existsSync(dataDstPath)) {
   fs.mkdirSync(dataDstPath);
 }
