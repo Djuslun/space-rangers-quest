@@ -2,7 +2,7 @@ const webpack = require("webpack");
 
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ServiceWorkerWebpackPlugin = require("serviceworker-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
@@ -38,8 +38,8 @@ const config = (env, argv) => {
     },
 
     output: {
-      filename: "[name].[contenthash].js",
-      chunkFilename: "[id].[contenthash].js",
+      filename: "[name].[hash].js",
+      chunkFilename: "[id].[hash].js",
       path: __dirname + "/built-web",
       globalObject:
         /* This is small workaround for workers scope and HotModuleReplacementPlugin */ MODE_DEVELOPMENT
@@ -67,7 +67,18 @@ const config = (env, argv) => {
         entry: "./src/ui/serviceWorker.ts",
         filename: "sw.js",
       }),
-      new CleanWebpackPlugin(),
+      new CleanWebpackPlugin({
+        cleanOnceBeforeBuildPatterns: [
+          '**/*',
+          '!data', // не удалять папку data
+          '!data/**/*', // не удалять содержимое папки data
+        ],
+      }),
+      new HtmlWebpackPlugin({
+        template: './src/webstatic/index.html', // путь к вашему HTML шаблону
+        filename: 'index.html', // название выходного файла
+        inject: true, // автоматически добавляет скрипты и стили
+      }),
     ],
 
     module: {
