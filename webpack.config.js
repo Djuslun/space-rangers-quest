@@ -4,6 +4,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const ServiceWorkerWebpackPlugin = require("serviceworker-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 
 const devServer /*: webpackDevServer.Configuration */ = {
@@ -37,8 +38,8 @@ const config = (env, argv) => {
     },
 
     output: {
-      filename: "[name].js",
-      chunkFilename: "[id].js",
+      filename: "[name].[contenthash].js",
+      chunkFilename: "[id].[contenthash].js",
       path: __dirname + "/built-web",
       globalObject:
         /* This is small workaround for workers scope and HotModuleReplacementPlugin */ MODE_DEVELOPMENT
@@ -56,8 +57,8 @@ const config = (env, argv) => {
       new MiniCssExtractPlugin({
         // Options similar to the same options in webpackOptions.output
         // both options are optional
-        filename: "[name].css",
-        chunkFilename: "[id].css",
+        filename: "[name].[contenthash].css",
+        chunkFilename: "[id].[contenthash].css",
       }),
       new webpack.DefinePlugin({
         __VERSION__: JSON.stringify(new Date().toISOString()),
@@ -66,6 +67,7 @@ const config = (env, argv) => {
         entry: "./src/ui/serviceWorker.ts",
         filename: "sw.js",
       }),
+      new CleanWebpackPlugin(),
     ],
 
     module: {
