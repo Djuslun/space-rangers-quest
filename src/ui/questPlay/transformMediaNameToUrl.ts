@@ -14,7 +14,7 @@ export function transformMedianameToUrl(
     return mediaName;
   }
   const extensionKind = {
-    img: ".jpg",
+    img: ".png",
     track: ".mp3",
     sound: ".mp3",
   }[kind];

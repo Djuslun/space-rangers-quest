@@ -136,7 +136,7 @@ for (const origin of fs.readdirSync(dataSrcPath + "/qm")) {
         ) {
           // No check for absolute urls
         } else {
-          const localImageFilename = qmmImage.toLowerCase() + ".jpg";
+          const localImageFilename = qmmImage.toLowerCase() + ".png";
           if (
             !index.dir.images.files.find(
               (imageCandidate) => imageCandidate.fileName === localImageFilename,
